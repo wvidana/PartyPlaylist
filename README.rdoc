@@ -1,11 +1,18 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Party Playlist offers a service to set up a Spotify playlist for your party!
 
-Things you may want to cover:
+Create and manage a playlist for your party.
 
-* Ruby version
+Features:
+ * guest account (search, vote and add songs)
+ * admin account (create playlist, remove songs, trick votes  and all guest account features)
+
+-----------------------------------------
+
+* Ruby version: 2.2.1
+
+* Rails version: 4.2.4
 
 * System dependencies
 
