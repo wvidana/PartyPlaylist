@@ -1,20 +1,12 @@
 require 'rspotify'
 
 class Spoti
-  def initialize
-    authenticate
-  end
-
-  def authenticate
-    RSpotify::authenticate(config['id'], config['secret'])
-  end
-
-  def config
-    @@config ||= YAML.load_file("config/spoti-credentials.yml")
+  def self.credentials
+    @credentials ||= Rails.application.config_for(:spotify)
+  rescue RuntimeError => e
+    raise RuntimeError.new('You need to set your own Spotify credentials. See the README for more info')
   end
 end
-
-spoti = Spoti.new
 
 artists = RSpotify::Artist.search('Arctic Monkeys')
 
