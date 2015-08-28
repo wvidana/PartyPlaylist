@@ -23,8 +23,5 @@ module Partyplaylist
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-
-    RSpotify::authenticate(Rails.application.secrets.spoti_id, Rails.application.secrets.spoti_secret)
-
   end
 end

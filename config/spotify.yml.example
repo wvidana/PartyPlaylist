@@ -1,0 +1,5 @@
+development: &development
+  id: <set your Spotify API ID here>
+  secret: <set your Spotify API secret here>
+test: *development
+production: *development
