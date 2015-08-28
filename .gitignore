@@ -18,4 +18,4 @@
 
 # Ignore secrets
 /config/secrets.yml
-/config/spoti-credentials.yml
+/config/spotify.yml

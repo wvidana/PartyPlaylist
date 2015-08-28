@@ -8,6 +8,15 @@ Features:
  * guest account (search, vote and add songs)
  * admin account (create playlist, remove songs, trick votes  and all guest account features)
 
+Installation:
+ * Get your own Spotify API credentials by registering your app at
+   https://developer.spotify.com/my-applications/#!/applications/create
+ * Remember to set the "Redirect URI" depending on where you're developing or
+   planning to deploy, meaning that if your environment is going to be local,
+   that URI should be "http://localhost:3000/auth/spotify/callback"
+ * Copy file config/spotify.yml.example to config/spotify.yml and put there your
+   own credentials.
+
 -----------------------------------------
 
 * Ruby version: 2.2.1
