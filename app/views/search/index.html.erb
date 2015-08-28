@@ -1,0 +1,6 @@
+<% @tracks.each do |track| %>
+    <p>
+        <%= button_to "Add", {controller: 'users', action: 'party', track_id: track.id} %>
+        <%= "#{track.name} - #{track.artists.first.name}  _  #{track.album.name}" %>
+    </p>
+<% end %>
