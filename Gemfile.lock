@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/Ferdy89/rspotify.git
+  revision: 1875d30fb9b12d728c108c6dba6fb7f36030fb26
+  specs:
+    rspotify (1.15.1)
+      omniauth-oauth2 (~> 1.1)
+      rest-client (~> 1.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -140,9 +148,6 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rspotify (1.15.1)
-      omniauth-oauth2 (~> 1.1)
-      rest-client (~> 1.7)
     sass (3.4.18)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -185,7 +190,7 @@ DEPENDENCIES
   jquery-rails
   pry-rails
   rails (= 4.2.4)
-  rspotify
+  rspotify!
   sass-rails (~> 5.0)
   spring
   sqlite3
