@@ -12,11 +12,9 @@ Rails.application.routes.draw do
 
   get '/auth/spotify/callback', to: 'users#spotify'
 
-  get 'users/playlists', to: 'users#playlists'
-  get 'users/party', to: 'users#party'
-  post 'users/party', to: 'users#add_song'
-
   resources 'search'
+  
+  resource 'playlist'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
