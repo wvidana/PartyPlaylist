@@ -1,15 +1,28 @@
 class PlaylistsController < ApplicationController
-
-  # TODO: Remove this test data
-  class TrackDouble < Struct.new(:id, :name, :artist, :album, :duration)
+  def index
+    @playlists = spotify_user.playlists
   end
 
   def show
-    @tracks = [
-      TrackDouble.new(1, 'Haciendo lo nuestro', 'Doble V', 'Lol', 98765),
-      TrackDouble.new(2, 'Otra', 'Doble V', 'Primero', 198765),
-      TrackDouble.new(3, 'Tercera', 'Chojin ', 'Lola', 293765),
-      TrackDouble.new(4, 'Final!', 'Chojin', '8cho', 134765),
-    ]
+    @tracks = partyplaylist.tracks
+  end
+
+  def update
+    partyplaylist.add_tracks!([RSpotify::Track.find(params[:track_id])])
+    redirect_to url_for(controller: :playlists, action: :show)
+  end
+
+  #####################################
+  # Private methods
+  #####################################
+  private
+
+  def spotify_user
+    @spotify_user = RSpotify::User.find(session[:current_user_id])
+  end
+
+  def partyplaylist
+    playlist_id = Spoti.credentials['playlist_id']
+    RSpotify::Playlist.find(spotify_user.id, playlist_id)
   end
 end
