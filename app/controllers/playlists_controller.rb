@@ -1,4 +1,6 @@
 class PlaylistsController < ApplicationController
+  
+  # Not in routes yet
   def index
     @playlists = spotify_user.playlists
   end
