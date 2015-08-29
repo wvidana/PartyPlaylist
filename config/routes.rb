@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'users/party', to: 'users#add_song'
 
   resources 'search'
+  resource 'playlist'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

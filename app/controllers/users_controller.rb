@@ -1,5 +1,3 @@
-require 'pry'
-
 class UsersController < ApplicationController
   def spotify_user
     user_hash = request.env['omniauth.auth']
