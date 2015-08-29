@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Happy path' do
+RSpec.feature 'Happy path' do
   scenario 'Guest user registers, sees the tracks and votes one' do
     visit '/users/sign_up'
 
