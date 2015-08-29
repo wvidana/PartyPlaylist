@@ -22,6 +22,15 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-rails'
+
+  gem 'rspec-rails', '~> 3.0'
+
+  gem 'capybara'
+  gem 'capybara-webkit', '~> 1.6'
+  gem 'selenium-webdriver', '~> 2.45'
+  gem 'chromedriver-helper'
+
+  gem 'database_cleaner'
 end
 
 group :development do
