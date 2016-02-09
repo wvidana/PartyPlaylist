@@ -1,3 +1,5 @@
+Playlist <%= "#{@spoti_playlist_id}" %>
+
 <% @tracks.each do |track| %>
     <p>
         <%= "#{track.name} - #{track.artists.first.name}  _  #{track.album.name}" %>

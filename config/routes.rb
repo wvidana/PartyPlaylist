@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources 'search'
   
   resource 'playlist'
+  resources 'playlists'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

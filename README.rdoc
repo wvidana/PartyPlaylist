@@ -26,3 +26,5 @@ Installation:
 * Database creation `docker-compose run web rake db:create`
 
 * Deployment instructions: see Docker documentation https://docs.docker.com/compose/rails/
+
+* Running on docker: type `docker-compose up`, server will run on http://localhost:3000
