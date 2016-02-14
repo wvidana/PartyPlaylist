@@ -32,6 +32,12 @@ group :development, :test do
   gem 'chromedriver-helper'
 
   gem 'database_cleaner'
+
+  gem 'rubocop'
+end
+
+group :test do
+  gem 'simplecov'
 end
 
 group :development do
