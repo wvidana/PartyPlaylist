@@ -23,7 +23,7 @@ Installation:
 
 * System dependencies: Docker Engine version 1.7.1 or greater
 
-* Database creation `docker-compose run web rake db:create`
+* Database creation `docker-compose run web rake db:create db:migrate`
 
 * Deployment instructions: see Docker documentation https://docs.docker.com/compose/rails/
 
