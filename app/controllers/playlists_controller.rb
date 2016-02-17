@@ -13,9 +13,6 @@ class PlaylistsController < ApplicationController
     redirect_to url_for(controller: :playlists, action: :show)
   end
 
-  #####################################
-  # Private methods
-  #####################################
   private
 
   def playlist_id
