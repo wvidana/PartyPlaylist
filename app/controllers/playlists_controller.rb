@@ -1,5 +1,4 @@
 class PlaylistsController < ApplicationController
-  
   def index
     @playlists = spotify_user.playlists
   end
@@ -15,12 +14,23 @@ class PlaylistsController < ApplicationController
 
   private
 
+  def session_params
+    { auth_hash: request.env['omniauth.auth'], session: session }
+  end
+
   def playlist_id
     @spoti_playlist_id = params[:id] || Spoti.credentials['playlist_id']
   end
 
   def spotify_user
-    @spotify_user = RSpotify::User.find(session[:current_user_id])
+    result = SpotifyUser.call session_params
+
+    if result.success?
+      @spotify_user ||= result.user
+    else
+      flash.now[:message] = t(result.message)
+      redirect_to url_for(controller: :welcome, action: :index)
+    end
   end
 
   def partyplaylist
