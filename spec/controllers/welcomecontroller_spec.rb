@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'controllers_helper'
 
 RSpec.describe WelcomeController, :type => :controller do
 

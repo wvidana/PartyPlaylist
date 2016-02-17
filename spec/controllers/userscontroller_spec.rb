@@ -1,10 +1,4 @@
-require 'rails_helper'
-
-RSpec.configure do |config|
-  config.include OmniauthMacros
-end
-
-OmniAuth.config.test_mode = true
+require 'controllers_helper'
 
 RSpec.describe UsersController, :type => :controller do
 
