@@ -22,15 +22,19 @@ class PlaylistsController < ApplicationController
     @spoti_playlist_id = params[:id] || Spoti.credentials['playlist_id']
   end
 
-  def spotify_user
+  def get_user
     result = SpotifyUser.call session_params
 
     if result.success?
-      @spotify_user ||= result.user
+      result.user
     else
       flash.now[:message] = t(result.message)
       redirect_to url_for(controller: :welcome, action: :index)
     end
+  end
+
+  def spotify_user
+    @spotify_user ||= get_user
   end
 
   def partyplaylist
