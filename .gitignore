@@ -19,3 +19,6 @@
 # Ignore secrets
 /config/secrets.yml
 /config/spotify.yml
+
+# Ignore coverage files
+coverage
