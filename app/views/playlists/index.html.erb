@@ -1,5 +1,5 @@
 <% @playlists.each do |playlist| %>
     <p>
-        <%= "#{playlist.id} : #{playlist.name}" %>
+        <%= link_to "#{playlist.id} : #{playlist.name}", { controller: :playlists, action: :show, id: playlist.id } %>
     </p>
 <% end %>

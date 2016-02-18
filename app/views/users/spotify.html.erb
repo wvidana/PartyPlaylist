@@ -1,5 +1,3 @@
 <h1>Users#spotify</h1>
 
-<%= link_to 'Playlists', '/playlists' %>
-<p>
-<%= link_to 'Party Playlist!', '/playlist' %>
+<%= link_to 'Party Playlist!', { controller: :playlists,  action: :index } %>
