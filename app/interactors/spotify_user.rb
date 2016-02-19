@@ -2,12 +2,12 @@ class SpotifyUser
   include Interactor
 
   def call
-    if user =  ( context.session[:current_user_id] &&
-        RSpotify::User.find(context.session[:current_user_id]) ) ||
-        RSpotify::User.new(context.auth_hash)
-      context.user = user
+    current_user_id = context.session[:current_user_id]
+    user = User.find current_user_id
+    if spoti_user = RSpotify::User.find(user.spoti_id)
+      context.user = spoti_user
     else
-      context.fail!(message: "Spotify User failed!")
+      context.fail!(message: "Spotify User failed! with current_user_id=(#{current_user_id})")
     end
   end
 end

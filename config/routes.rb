@@ -9,5 +9,10 @@ Rails.application.routes.draw do
   resources 'search'
   
   resource 'playlist'
-  resources 'playlists'
+
+  resources :playlists do
+    collection do
+      get 'assign_user'
+    end
+  end
 end
