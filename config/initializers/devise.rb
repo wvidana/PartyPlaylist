@@ -1,3 +1,5 @@
+require 'rspotify/oauth'
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -235,7 +237,11 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :spotify,
+    Spoti.credentials['id'],
+    Spoti.credentials['secret'],
+    scope: 'user-read-email playlist-modify-public user-library-read user-library-modify'
+    # callback_url: '/auth/spotify/callback'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
-  get 'users/spotify'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  resources :users, only: [:show]
 
   get 'welcome/index'
 
@@ -9,8 +9,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-
-  get '/auth/spotify/callback', to: 'users#spotify'
 
   resources 'search'
   
