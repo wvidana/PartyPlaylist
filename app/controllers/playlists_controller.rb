@@ -4,10 +4,10 @@ class PlaylistsController < ApplicationController
   end
 
   def show
-    if params.key?(:id)
-      @tracks = partyplaylist.tracks
+    if playlist = Playlist.find(params[:id])
+      @tracks = spotify_playlist.tracks
     else
-      puts "NO PLAYLIST ID!!!"
+      puts "NO PLAYLIST FOUND IN DB"
       redirect_to url_for(controller: :playlists, action: :index)
     end
   end
@@ -46,7 +46,8 @@ class PlaylistsController < ApplicationController
       @spotify_user ||= get_user
     end
 
-    def partyplaylist
-      RSpotify::Playlist.find(spotify_user.id, playlist_id)
-    end
+  def spotify_playlist
+    result = SpotifyPlaylist.call session_params
+    result.spotify_playlist
+  end
 end
