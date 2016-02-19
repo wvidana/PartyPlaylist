@@ -31,20 +31,20 @@ class PlaylistsController < ApplicationController
     { session: session , playlist_id: params[:id] }
   end
 
-    def get_user
-      result = SpotifyUser.call session_params
+  def get_user
+    result = SpotifyUser.call session_params
 
-      if result.success?
-        result.user
-      else
-        flash.now[:message] = t(result.message)
-        redirect_to url_for(controller: :welcome, action: :index)
-      end
+    if result.success?
+      result.user
+    else
+      flash.now[:message] = t(result.message)
+      redirect_to url_for(controller: :welcome, action: :index)
     end
+  end
 
-    def spotify_user
-      @spotify_user ||= get_user
-    end
+  def spotify_user
+    @spotify_user ||= get_user
+  end
 
   def spotify_playlist
     result = SpotifyPlaylist.call session_params
