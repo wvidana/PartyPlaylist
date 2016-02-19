@@ -1,6 +1,10 @@
 class SearchController < ApplicationController
   def index
-    query = params[:q]
-    @tracks = RSpotify::Track.search(query, limit: 10)
+    @tracks = SpotifyTrackSearch.call session_params
   end
+
+  private
+    def session_params
+      { session: session, q: params[:q] }
+    end
 end
