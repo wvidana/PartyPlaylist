@@ -3,7 +3,6 @@ class SpotifyPlaylist
 
   def call
     playlist = Playlist.find context.playlist_id
-
     if spotify_playlist = RSpotify::Playlist.find(playlist.user.spoti_id, playlist.spoti_id) 
       context.spotify_playlist = spotify_playlist
     else
