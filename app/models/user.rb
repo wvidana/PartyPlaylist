@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :spoti_id
 
+  has_one :playlist
+
   def self.from_omniauth(auth)
     where(spoti_id: auth.info.id).first_or_create do |user|
       user.email = auth.info.email
