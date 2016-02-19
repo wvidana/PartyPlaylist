@@ -1,10 +1,16 @@
 class PlaylistsController < ApplicationController
   def index
-    @playlists = spotify_user.playlists
+    user = get_user
+    if playlist = user.playlist
+      redirect_to(action: :show, id: playlist.id)
+    else
+      @playlists = spotify_user.playlists
+    end
   end
 
   def show
     if playlist = Playlist.find(params[:id])
+      @spoti_playlist_id = playlist.spoti_id
       @tracks = spotify_playlist.tracks
     else
       puts "NO PLAYLIST FOUND IN DB"
@@ -19,7 +25,7 @@ class PlaylistsController < ApplicationController
   end
 
   def assign_user
-    user = User.find session[:current_user_id]
+    user = get_user
     Playlist.create(spoti_id: params[:spoti_id], user_id: user.id)
     playlist = Playlist.find_by(spoti_id: params[:spoti_id])
     redirect_to url_for(controller: :playlists, action: :show, id: playlist.id)
@@ -32,8 +38,11 @@ class PlaylistsController < ApplicationController
     end
 
     def get_user
-      result = SpotifyUser.call session_params
+      User.find session[:current_user_id]
+    end
 
+    def get_user_from_spotify
+      result = SpotifyUser.call session_params
       if result.success?
         result.user
       else
@@ -43,7 +52,7 @@ class PlaylistsController < ApplicationController
     end
 
     def spotify_user
-      @spotify_user ||= get_user
+      @spotify_user ||= get_user_from_spotify
     end
 
     def spotify_playlist
