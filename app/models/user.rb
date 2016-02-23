@@ -6,8 +6,6 @@ class User < ActiveRecord::Base
 
   has_one :playlist
 
-  serialize :spoti_data, OmniAuth::AuthHash
-
   def self.from_omniauth(auth)
     where(spoti_id: auth.info.id).first_or_create do |user|
       user.email = auth.info.email
