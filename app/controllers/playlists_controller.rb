@@ -20,9 +20,14 @@ class PlaylistsController < ApplicationController
 
   def update
     playlist = Playlist.find_by(spoti_id: params[:spoti_playlist_id])
+
+    # Needs to set RSpotify credentials
+    user = spotify_user({ spoti_user_id: playlist.user.spoti_id })
+
     parameters = { spoti_track_id: params[:spoti_track_id],
-      spoti_playlist_id: params[:spoti_playlist_id],
-      playlist_id: playlist.id }
+        spoti_playlist_id: params[:spoti_playlist_id],
+        playlist_id: playlist.id }
+
     update_spotify_playlist(parameters)
     redirect_to url_for(controller: :playlists, action: :show, id: playlist.id)
   end
@@ -41,8 +46,10 @@ class PlaylistsController < ApplicationController
     end
 
     def update_spotify_playlist(options={})
-      spoti_track = SpotifyTrackFind.call(session_params.merge(options)).track
-      spotify_playlist(options).add_tracks!([spoti_track])
+      result = SpotifyTrackFind.call(session_params.merge(options))
+      spoti_track = result.track
+      playlist = spotify_playlist(options)
+      playlist.add_tracks!([spoti_track])
     end
 
     def get_user
