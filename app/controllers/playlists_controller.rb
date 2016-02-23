@@ -18,10 +18,13 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  # Pending revision...
   def update
-    partyplaylist.add_tracks!([RSpotify::Track.find(params[:track_id])])
-    redirect_to url_for(controller: :playlists, action: :show)
+    playlist = Playlist.find_by(spoti_id: params[:spoti_playlist_id])
+    parameters = { spoti_track_id: params[:spoti_track_id],
+      spoti_playlist_id: params[:spoti_playlist_id],
+      playlist_id: playlist.id }
+    update_spotify_playlist(parameters)
+    redirect_to url_for(controller: :playlists, action: :show, id: playlist.id)
   end
 
   def assign_user
@@ -35,6 +38,11 @@ class PlaylistsController < ApplicationController
 
     def session_params
       { session: session , playlist_id: params[:id] }
+    end
+
+    def update_spotify_playlist(options={})
+      spoti_track = SpotifyTrackFind.call(session_params.merge(options)).track
+      spotify_playlist(options).add_tracks!([spoti_track])
     end
 
     def get_user
@@ -55,8 +63,9 @@ class PlaylistsController < ApplicationController
       @spotify_user ||= get_user_from_spotify
     end
 
-    def spotify_playlist
-      result = SpotifyPlaylist.call session_params
+    def spotify_playlist(options={})
+      pp options
+      result = SpotifyPlaylist.call session_params.merge(options)
       result.spotify_playlist
     end
 end
