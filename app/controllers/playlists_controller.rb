@@ -4,7 +4,7 @@ class PlaylistsController < ApplicationController
     if playlist = user.playlist
       redirect_to(action: :show, id: playlist.id)
     else
-      @playlists = spotify_user.playlists
+      @playlists = spotify_user({ spoti_user_id: user.spoti_id }).playlists
     end
   end
 
@@ -49,8 +49,8 @@ class PlaylistsController < ApplicationController
       User.find session[:current_user_id]
     end
 
-    def get_user_from_spotify
-      result = SpotifyUser.call session_params
+    def spotify_user(options={})
+      result = SpotifyUser.call(options)
       if result.success?
         result.user
       else
@@ -59,12 +59,7 @@ class PlaylistsController < ApplicationController
       end
     end
 
-    def spotify_user
-      @spotify_user ||= get_user_from_spotify
-    end
-
     def spotify_playlist(options={})
-      pp options
       result = SpotifyPlaylist.call session_params.merge(options)
       result.spotify_playlist
     end
