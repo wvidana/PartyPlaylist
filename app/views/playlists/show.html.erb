@@ -6,7 +6,7 @@ Playlist <%= "#{@spoti_playlist_id}" %>
     </p>
 <% end %>
 
-<%= form_tag("/search", method: "get") do %>
+<%= form_tag({ controller: :search, action: :index }, method: "get") do %>
   <%= hidden_field_tag :spoti_playlist_id, @spoti_playlist_id %>
   <%= label_tag(:q, "Search for:") %>
   <%= text_field_tag(:q) %>

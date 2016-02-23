@@ -1,6 +1,9 @@
+<h1>Search#index</h1>
+<%= "Playlist ID = #{@spoti_playlist_id}" %>
+<p>
 <% @tracks.each do |track| %>
     <p>
-        <%= button_to "Add", {controller: 'playlists', action: 'update', track_id: track.id}, method: :put %>
+        <%= button_to "Add", { controller: :playlists, action: :update, spoti_track_id: track.id, spoti_playlist_id: @spoti_playlist_id  }, method: :put %>
         <%= "#{track.name} - #{track.artists.first.name}  _  #{track.album.name}" %>
     </p>
 <% end %>
