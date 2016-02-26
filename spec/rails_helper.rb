@@ -7,6 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'database_cleaner'
+require 'headless'
 
 # Requires supporting ruby files
 Dir[Rails.root.join("spec/support/*.rb")].sort.each { |f| require f }
@@ -39,10 +40,13 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.before(:each) do
+    Headless.new().start
     # Slow, but necessary when using Selenium under acceptance tests
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean
   end
+
+  Capybara.default_host = 'http://localhost:3000'
 end
 
 # Register capybara drivers
@@ -71,5 +75,5 @@ Capybara.configure do |c|
   c.default_wait_time       = 5
   c.ignore_hidden_elements  = true
   c.default_driver          = DEFAULT_DRIVER
-  c.javascript_driver       = :firefox
+  # c.javascript_driver       = :firefox
 end
