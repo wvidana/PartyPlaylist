@@ -9,6 +9,6 @@ web:
     - "3000:3000"
   links:
     - db
-rubocop:
-  build: .
-  command: rubocop -R
+# rubocop:
+#   build: .
+#   command: rubocop -R
